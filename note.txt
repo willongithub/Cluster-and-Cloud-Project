@@ -1,0 +1,122 @@
+# notebook for the project
+
+# Group 30
+# Surnames Names Student IDs
+# Wu Chongchong 720722
+# Wu Siqi 750892
+# Zhao Danni 756200
+# Yang Chao 795047
+# Li Hanchen 807363
+
+# VMs
+130.56.249.18
+130.56.249.213
+
+# clusters
+115.146.93.174
+115.146.93.175
+115.146.93.176
+
+# mailbox
+750892 siqi wu swu5@student.unimelb.edu.au
+807363 hanchen li hanchenl@student.unimelb.edu.au
+795047 chao yang chaoy3@student.unimelb.edu.au
+756200 Danni Zhao zhaod1@student.unimelb.edu.au
+720722 Chongchong Wu
+
+# get into superuser shell
+sudo -i
+exit
+
+# set password for user
+sudo passwd couchdb
+
+# change user
+su - couchdb
+exit
+
+# restart couchDB
+sv restart couchdb
+
+# creat tunnel for using Fauxton in browser
+ssh -N -L 9000:localhost:5984 -i testkey.pem ubuntu@115.146.93.176
+
+# get database information
+curl -X GET http://127.0.0.1:5984/database_name | python -m json.tool
+
+# list all database
+curl -X GET http://127.0.0.1:5984/_all_dbs
+
+# create new database
+curl -X PUT "http://xxx.xxx.xxx.xxx:5984/database-name?n=3&q=8"
+
+# pretty-print json
+curl http://my_url/ | python -m json.tool
+
+# list clusters
+curl -X GET "http://admin:password@localhost:5984/_membership"
+
+# list process
+ps aux | grep python
+
+# kill process
+kill -9 <pid>
+
+# print last 20 rows
+tail -20 nohup.out
+
+# list network stats
+sudo netstat -tlpn
+sudo lsof -i -P | grep -i "listen"
+
+# disk usage
+df -h
+
+# brisbane tweet example id
+de5ff2d62e319831f9c7a860dc138b40
+
+# map function
+function (doc) {
+  var key, value, time, content, pos
+  if (doc.geo){
+    if (doc.place.name == "Gold Coast"){
+      key = doc.id
+      time = doc.created_at
+      content = doc.text
+      pos = doc.coordinates.coordinates
+      value = [time, content, pos]
+      emit(key, value);
+    }
+  }
+}
+
+# POST map function format
+curl -X PUT "http://115.146.93.174:5984/aus/_design/tweetfilter/" -d "{function (doc) {\n  var key, value, time, content, pos\n  if (doc.geo){\n    if (doc.place.name == \"Darwin\"){\n      key = doc.id\n      time = doc.created_at\n      content = doc.text\n      pos = doc.coordinates.coordinates\n      value = [time, content, pos]\n      emit(key, value);\n    }\n  }\n}"
+
+"views": {
+        "adl": {
+            "map": "function (doc) {\n  var key, value, time, content, pos\n  if (doc.geo){\n    if (doc.place.name == \"Adelaide\"){\n      key = doc.id\n      time = doc.created_at\n      content = doc.text\n      pos = doc.coordinates.coordinates\n      value = [time, content, pos]\n      emit(key, value);\n    }\n  }\n}"
+        },
+        "all": {
+            "map": "function (doc) {\n  var key, value, time, content, pos\n  if (doc.geo){\n    key = doc.id\n    time = doc.created_at\n    content = doc.text\n    pos = doc.coordinates.coordinates\n    value = [time, content, pos]\n    emit(key, value);\n  }\n}"
+        },
+
+# access result
+curl -X GET "http://115.146.93.175:8848/?step=10&city=mel"
+
+# access view(mapped database)
+curl -X GET "http://115.146.93.176:5984/aus/_design/tweetfilter/_view/validdata/?limit=10" | python -m json.tool
+
+# start server
+#! /bin/sh
+nohup python analysis_server.py &
+
+# install VADER
+pip install --upgrade pip
+sudo -i
+pip install vaderSentiment
+pip install --upgrade vaderSentiment
+
+# auto start
+#! /bin/sh
+nohup python analysis_server.py > analy.out 2>&1 &
