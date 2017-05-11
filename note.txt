@@ -17,6 +17,9 @@
 115.146.93.175
 115.146.93.176
 
+# retrieve file from git repository
+wget https://raw.githubusercontent.com/willongithub/Cluster-and-Cloud-Project/master/note.txt
+
 # mailbox
 750892 siqi wu swu5@student.unimelb.edu.au
 807363 hanchen li hanchenl@student.unimelb.edu.au
