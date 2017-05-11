@@ -1,0 +1,17 @@
+{
+  "_id" : "_design/tweetfilter",
+  "views" : {
+    "bri" : {
+	"map" : "function (doc) {\n  var key, value, time, content, pos\n  if (doc.geo){\n    if (doc.place.name == \"Brisbane\"){\n      key = doc.id\n      time = doc.created_at\n      content = doc.text\n      pos = doc.coordinates.coordinates\n      value = [time, content, pos]\n      emit(key, value);\n    }\n  }\n}"
+		},
+	"adl" : {
+	"map" : "function (doc) {\n  var key, value, time, content, pos\n  if (doc.geo){\n    if (doc.place.name == \"Adelaide\"){\n      key = doc.id\n      time = doc.created_at\n      content = doc.text\n      pos = doc.coordinates.coordinates\n      value = [time, content, pos]\n      emit(key, value);\n    }\n  }\n}"
+		},
+	"mel" : {
+	"map" : "function (doc) {\n  var key, value, time, content, pos\n  if (doc.geo){\n    if (doc.place.name == \"Melbourne\"){\n      key = doc.id\n      time = doc.created_at\n      content = doc.text\n      pos = doc.coordinates.coordinates\n      value = [time, content, pos]\n      emit(key, value);\n    }\n  }\n}"
+		},
+	"all" : {
+	"map" : "function (doc) {\n  var key, value, time, content, pos\n  if (doc.geo){\n    key = doc.id\n    time = doc.created_at\n    content = doc.text\n    pos = doc.coordinates.coordinates\n    value = [time, content, pos]\n    emit(key, value);\n  }\n}"
+		}	
+	}
+}
