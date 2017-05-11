@@ -1,6 +1,9 @@
 # Cluster-and-Cloud-Project
 It is repository for a project regarding cluster database system with its front end web page.
 
+[Demo video](https://youtu.be/YNeKlkuKz_w)
+
+
 ## Cloud Preparation
 
 Here we've build a CouchDB database cluster on NeCTAR cloud.
