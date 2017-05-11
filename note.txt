@@ -1,4 +1,5 @@
 # notebook for the project
+# here are some useful shell command and info
 
 # Group 30
 # Surnames Names Student IDs
