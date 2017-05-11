@@ -1,3 +1,11 @@
+# Group 30
+# Surnames Names Student IDs
+# Wu Siqi 750892
+# Wu Chongchong 720722
+# Zhao Danni 756200
+# Yang Chao 795047
+# Li Hanchen 807363
+
 #!/bin/bash
 sudo cp hosts /etc/ansible
 sudo cp mykey.pem /etc/ansible
@@ -11,6 +19,10 @@ ansible v1 -m copy -a "src=./vmv1.args dest=/home/couchdb/etc/vm.args" -u root -
 ansible v1 -m copy -a "src=./localv1.ini dest=/home/couchdb/etc/local.ini" -u root --sudo
 ansible v2 -m copy -a "src=./vmv2.args dest=/home/couchdb/etc/vm.args" -u root --sudo
 ansible v2 -m copy -a "src=./localv2.ini dest=/home/couchdb/etc/local.ini" -u root --sudo
+ansible v3 -m copy -a "src=./vmv3.args dest=/home/couchdb/etc/vm.args" -u root --sudo
+ansible v3 -m copy -a "src=./localv3.ini dest=/home/couchdb/etc/local.ini" -u root --sudo
+ansible v4 -m copy -a "src=./vmv4.args dest=/home/couchdb/etc/vm.args" -u root --sudo
+ansible v4 -m copy -a "src=./localv4.ini dest=/home/couchdb/etc/local.ini" -u root --sudo
 
 ansible all -m shell -a 'sv restart couchdb' -u root --sudo
 
@@ -38,5 +50,4 @@ ansible all -m copy -a 'src=./myserver.py dest=/home/ubuntu'
 ansible all -m copy -a 'src=./contentcounter.py dest=/home/ubuntu'
 
 ansible all -m shell -a 'nohup python tweetcollector.py > collector.txt 2>&1 &'
-ansible all -m shell -a 'nohup python myserver.py > server.txt 2>&1 &'
-
+ansible v1 -m shell -a 'nohup python myserver.py > server.txt 2>&1 &'
