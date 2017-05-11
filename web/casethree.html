@@ -1,0 +1,394 @@
+<!--Group 30
+Surnames Names Student IDs
+Wu Chongchong 720722
+Wu Siqi 750892
+Zhao Danni 756200
+Yang Chao 795047
+Li Hanchen 807363 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="buttons.css">
+
+    <title>Comp 90024 Cluster and Cloud Computing</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="assets/js/ie-emulation-modes-warning.js"></script>
+
+    <link href="carousel.css" rel="stylesheet">
+
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+    
+    <script type="text/javascript" src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+    <script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDXNvQ7mrs3TMLUWG6GipPadaF6WazBP7A&sensor=false">
+    </script>
+
+    <style type="text/css">
+.side-bar a,.chat-tips i {background: url(right_bg.png) no-repeat;}
+.side-bar {width: 66px;position: fixed;bottom: 20px;right: 25px;font-size: 0;line-height: 0;z-index: 100;}
+.side-bar a {width: 66px;height: 66px;display: inline-block;background-color: #ddd;margin-bottom: 2px;}
+.side-bar a:hover {background-color: #669fdd;}
+.side-bar .icon-qq {background-position: 0 -62px;}
+.side-bar .icon-chat {background-position: 0 -130px;position: relative;}
+.side-bar .icon-chat:hover .chat-tips {display: block;}
+.side-bar .icon-blog {background-position: 0 -198px;}
+.side-bar .icon-mail {background-position: 0 -266px;}
+.side-bar .icon-totop {background-position: 0 -334px;}
+.chat-tips {padding: 20px;border: 1px solid #d1d2d6;position: absolute;right: 78px;top: -55px;background-color: #fff;display: none;}
+.chat-tips i {width: 9px;height: 16px;display: inline-block;position: absolute;right: -9px;top: 80px;background-position:-88px -350px;}
+.chat-tips img {width: 138px;height: 138px;}
+</style>
+
+    <script type="text/javascript">
+var map;
+var index = 0;
+var suicide = new Array();
+function initialize(obj) 
+{
+if (obj != null) {
+    //var myOptions = {center: new google.maps.LatLng(-37.8108, 144.9631),
+    var myOptions = {center: new google.maps.LatLng(obj.tweets[0].coordinates[1], obj.tweets[0].coordinates[0]),
+    zoom: 9,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
+    alert("map done length is "+obj.tweets.length);
+    for(var i = 0; i < obj.tweets.length; i++)
+            {
+                var coordinates = object.tweets[i].coordinates;
+                addMarker(coordinates[1],coordinates[0],object.tweets[i].score);
+                marker.setMap(map);
+            }
+            chart();
+            piechart();
+}
+else{
+    var myOptions = {center: new google.maps.LatLng(-37.8108, 144.9631),
+    zoom: 3,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    map = new google.maps.Map(document.getElementById("map_canvas"),myOptions); 
+}
+}
+
+function test()
+{
+  var myOptions = {center: new google.maps.LatLng(-37.8108, 144.9631),
+    zoom: 3,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    map = new google.maps.Map(document.getElementById("map_canvas"),myOptions); 
+    creatXmlHttp();
+    xhr.onreadystatechange = addor;
+    xhr.open("GET", "http://115.146.93.176:8848/?city=mel&mood=1", false);
+    xhr.send(null);
+
+    creatXmlHttp();
+    xhr.onreadystatechange = addor;
+    xhr.open("GET", "http://115.146.93.176:8848/?city=syd&mood=1", false);
+    xhr.send(null);
+
+    creatXmlHttp();
+    xhr.onreadystatechange = addor;
+    xhr.open("GET", "http://115.146.93.176:8848/?city=bri&mood=1", false);
+    xhr.send(null);
+
+    creatXmlHttp();
+    xhr.onreadystatechange = addor;
+    xhr.open("GET", "http://115.146.93.176:8848/?city=adl&mood=1", false);
+    xhr.send(null);
+
+    creatXmlHttp();
+    xhr.onreadystatechange = addor;
+    xhr.open("GET", "http://115.146.93.176:8848/?city=hbt&mood=1", false);
+    xhr.send(null);
+
+    creatXmlHttp();
+    xhr.onreadystatechange = addor;
+    xhr.open("GET", "http://115.146.93.176:8848/?city=mel&search=park", false);
+    xhr.send(null);
+
+    creatXmlHttp();
+    xhr.onreadystatechange = addor;
+    xhr.open("GET", "http://115.146.93.176:8848/?city=syd&search=park", false);
+    xhr.send(null);
+
+    creatXmlHttp();
+    xhr.onreadystatechange = addor;
+    xhr.open("GET", "http://115.146.93.176:8848/?city=bri&search=park", false);
+    xhr.send(null);
+
+    creatXmlHttp();
+    xhr.onreadystatechange = addor;
+    xhr.open("GET", "http://115.146.93.176:8848/?city=adl&search=park", false);
+    xhr.send(null);
+
+    creatXmlHttp();
+    xhr.onreadystatechange = addor;
+    xhr.open("GET", "http://115.146.93.176:8848/?city=hbt&search=park", false);
+    xhr.send(null);
+
+    creatXmlHttp();
+    xhr.onreadystatechange = addor;
+    xhr.open("GET", "http://115.146.93.176:8848/?city=mel&search=", false);
+    xhr.send(null);
+
+    creatXmlHttp();
+    xhr.onreadystatechange = addor;
+    xhr.open("GET", "http://115.146.93.176:8848/?city=syd&search=", false);
+    xhr.send(null);
+
+    creatXmlHttp();
+    xhr.onreadystatechange = addor;
+    xhr.open("GET", "http://115.146.93.176:8848/?city=bri&search=", false);
+    xhr.send(null);
+
+    creatXmlHttp();
+    xhr.onreadystatechange = addor;
+    xhr.open("GET", "http://115.146.93.176:8848/?city=adl&search=", false);
+    xhr.send(null);
+
+    creatXmlHttp();
+    xhr.onreadystatechange = addor;
+    xhr.open("GET", "http://115.146.93.176:8848/?city=hbt&search=", false);
+    xhr.send(null);
+    chart();
+    chart2();
+}
+
+function addor(){
+      if (xhr.readyState == 4) {
+        if(xhr.status == 200){
+            var value = xhr.responseText;
+            suicide[parseInt(index)] = value;
+            index++;
+        }
+    }
+}
+function creatXmlHttp()
+{
+    if(window.XMLHttpRequest)
+         xhr = new XMLHttpRequest();
+    else
+         xhr = new ActiveObject("Microsoft,XMLHTTP");
+}
+
+function addMarker(lat,lon,score)
+{
+    var color
+    if(score == 0)
+    {
+    marker = new google.maps.Marker({
+    position: new google.maps.LatLng(lat, lon),
+    icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
+    }); 
+    return marker;
+    }
+    else
+    {
+        if (score > 0)
+        {
+            marker = new google.maps.Marker({
+            position: new google.maps.LatLng(lat, lon),
+            icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+            }); 
+            return marker;
+        }
+        else
+        {
+            marker = new google.maps.Marker({
+            position: new google.maps.LatLng(lat, lon),
+            icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+            }); 
+    return marker;
+        }
+    }
+}
+var xhr;
+
+function creatHttp(xtt)
+{
+    if(window.XMLHttpRequest)
+    {
+         xtt = new XMLHttpRequest();
+         return xtt;
+    }
+    else
+    {
+         xtt = new ActiveObject("Microsoft,XMLHTTP");
+         return xtt;
+    }
+}
+
+function chart(){ 
+  var chart = new CanvasJS.Chart("chartContainer", {
+      theme: "theme2",
+      title:{
+        text: "Twitter states vs \"Park\" occurrence ratio in Twitter"              
+      },
+      data: [   
+      {      
+       type: "line",
+       name: "Average of sentiment analysis score",
+       showInLegend: true,
+       dataPoints: [
+       { label: "NSW", y: parseInt(suicide[0]*100) },
+       { label: "VIC", y: parseInt(suicide[1]*100) },
+       { label: "QLD", y: parseInt(suicide[2]*100) },                                    
+       { label: "TAS", y: parseInt(suicide[3]*100) },
+       { label: "SA", y: parseInt(suicide[4]*100) }
+       ]
+     },
+     {      
+       type: "column",
+       name: "\"Park\" occurrence in Twitter",
+       showInLegend: true,
+       dataPoints: [
+       { label: "NSW", y: parseInt((suicide[5]/suicide[10])*1000) },
+       { label: "VIC", y: parseInt((suicide[6]/suicide[11])*1000) },
+       { label: "QLD", y: parseInt((suicide[7]/suicide[12])*1000) },                                    
+       { label: "TAS", y: parseInt((suicide[8]/suicide[13])*1000) },
+       { label: "SA", y: parseInt((suicide[9]/suicide[14])*1000) }
+       ]
+     }
+    ],
+ /** Set axisY properties here*/
+    axisY:{
+      prefix: "",
+      suffix: "%"
+    }    
+  });
+
+chart.render();
+}
+
+function chart2(){ 
+  var chart = new CanvasJS.Chart("chartContainer2", {
+      theme: "theme2",
+      title:{
+        text: "Average distance from central of the city to the national park"              
+      },
+      data: [   
+      {      
+       type: "line",
+       name: "Average distance",
+       showInLegend: true,
+       dataPoints: [
+       { label: "NSW-Syd", y: 16 },
+       { label: "NSW-Nc", y: 41.7 },
+       { label: "VIC-Mel", y: 36.2 },                                    
+       { label: "QLD-Bri", y: 15.9 },
+       { label: "SA-Adel", y:73.4 }
+       ]
+     }
+    ],
+ /** Set axisY properties here*/
+    axisY:{
+      prefix: "",
+      suffix: "km"
+    }    
+  });
+
+chart.render();
+}
+
+
+</script>
+  </head>
+<!-- NAVBAR
+================================================== -->
+  <body onload="initialize()">
+    <div class="navbar-wrapper">
+      <div class="container">
+
+        <nav class="navbar navbar-inverse navbar-static-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Group 30</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="index.html">Home</a></li>
+                <li><a href="caseone.html">Case One</a></li>
+                <li><a href="casetwo.html">Case Two</a></li>
+                <li><a href="#contact">Case Three</a></li>
+                <li><a href="coast.html">Location & Time</a></li>
+                <li><a href="aboutus.html">About Us</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+      
+    
+
+
+    <!-- Carousel
+    ================================================== -->
+    
+  <div class="row">
+    <div class="col-md-12">
+    <div id="map_canvas" style="height:500px"></div>
+    <div class="row">
+    <div class="col-md-4">
+    <img src="./img/np.jpg" width="300" height="300" onclick="test()"></image>
+  </div>
+  <div>
+    <h1>National Park</h1>
+    The leaves of plants make fresh air. Their roots hold the soil together, which stops erosion and helps keep our waterways clean. National parks have lots of plants so they play a big part in keeping our environment healthy.                                          -Environment.NSW.GOV
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+  <div id="chartContainer" style="height: 300px;"></div>
+
+  </div>
+  <div class="col-md-6">
+  <div id="chartContainer2" style="height: 300px; "></div>
+  </div>
+  </div>
+
+      <!-- FOOTER -->
+      <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+       
+      </footer>
+</div>
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="dist/js/bootstrap.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="assets/js/vendor/holder.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>

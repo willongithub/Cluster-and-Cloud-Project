@@ -1,0 +1,305 @@
+<!--Group 30
+Surnames Names Student IDs
+Wu Chongchong 720722
+Wu Siqi 750892
+Zhao Danni 756200
+Yang Chao 795047
+Li Hanchen 807363 -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+    <link rel="stylesheet" href="buttons.css">
+
+    <title>Comp 90024 Cluster and Cloud Computing</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Custom styles for this template -->
+    <link href="carousel.css" rel="stylesheet">
+
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+    
+    <script type="text/javascript" src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+    <script type="text/javascript"
+      src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDXNvQ7mrs3TMLUWG6GipPadaF6WazBP7A&sensor=false">
+    </script>
+
+    <style type="text/css">
+.side-bar a,.chat-tips i {background: url(right_bg.png) no-repeat;}
+.side-bar {width: 66px;position: fixed;bottom: 20px;right: 25px;font-size: 0;line-height: 0;z-index: 100;}
+.side-bar a {width: 66px;height: 66px;display: inline-block;background-color: #ddd;margin-bottom: 2px;}
+.side-bar a:hover {background-color: #669fdd;}
+.side-bar .icon-qq {background-position: 0 -62px;}
+.side-bar .icon-chat {background-position: 0 -130px;position: relative;}
+.side-bar .icon-chat:hover .chat-tips {display: block;}
+.side-bar .icon-blog {background-position: 0 -198px;}
+.side-bar .icon-mail {background-position: 0 -266px;}
+.side-bar .icon-totop {background-position: 0 -334px;}
+.chat-tips {padding: 20px;border: 1px solid #d1d2d6;position: absolute;right: 78px;top: -55px;background-color: #fff;display: none;}
+.chat-tips i {width: 9px;height: 16px;display: inline-block;position: absolute;right: -9px;top: 80px;background-position:-88px -350px;}
+.chat-tips img {width: 138px;height: 138px;}
+</style>
+
+    <script type="text/javascript">
+var map;
+function initialize(obj) 
+{
+if (obj != null) {
+    //alert("Points received -> plotting map");
+    //var myOptions = {center: new google.maps.LatLng(-37.8108, 144.9631),
+    var myOptions = {center: new google.maps.LatLng(obj.tweets[0].coordinates[1], obj.tweets[0].coordinates[0]),
+    zoom: 12,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    map = new google.maps.Map(document.getElementById("map_canvas"),myOptions);
+    //alert("map done length is "+obj.tweets.length);
+    for(var i = 0; i < obj.tweets.length; i++)
+            {
+                var coordinates = object.tweets[i].coordinates;
+                addMarker(coordinates[1],coordinates[0],object.tweets[i].score);
+                marker.setMap(map);
+            }
+            chart();
+            piechart();
+}
+else{
+    //alert("Nothing received->normal map");
+    var myOptions = {center: new google.maps.LatLng(-37.8108, 144.9631),
+    zoom: 3,
+    mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    map = new google.maps.Map(document.getElementById("map_canvas"),myOptions); 
+}
+}
+
+function addMarker(lat,lon,score)
+{
+    var color
+    if(score == 0)
+    {
+    marker = new google.maps.Marker({
+    position: new google.maps.LatLng(lat, lon),
+    icon: 'http://maps.google.com/mapfiles/ms/icons/yellow-dot.png'
+    }); 
+    return marker;
+    }
+    else
+    {
+        if (score > 0)
+        {
+            marker = new google.maps.Marker({
+            position: new google.maps.LatLng(lat, lon),
+            icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+            }); 
+            return marker;
+        }
+        else
+        {
+            marker = new google.maps.Marker({
+            position: new google.maps.LatLng(lat, lon),
+            icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png'
+            }); 
+    return marker;
+        }
+    }
+}
+var xhr;
+function creatXmlHttp()
+{
+    if(window.XMLHttpRequest)
+         xhr = new XMLHttpRequest();
+    else
+         xhr = new ActiveObject("Microsoft,XMLHTTP");
+}
+
+function submit1(){
+    creatXmlHttp();
+    xhr.onreadystatechange = change;
+    xhr.open("GET", "http://115.146.93.176:8848/?city=mel&step=700", true);
+    xhr.send(null);
+}
+function submit2(){
+    creatXmlHttp();
+    xhr.onreadystatechange = change;
+    xhr.open("GET", "http://115.146.93.176:8848/?city=nc&step=700", true);
+    xhr.send(null);
+}
+function submit3(){
+    creatXmlHttp();
+    xhr.onreadystatechange = change;
+    xhr.open("GET", "http://115.146.93.176:8848/?city=bri&step=700", true);
+    xhr.send(null);
+}
+
+function chart(){    var chart = new CanvasJS.Chart("chartContainer", {
+      theme: "theme2",
+      title:{
+        text: "Twitter and Time"              
+      },
+      data: [   
+      {      
+       type: "line",
+       name: "Melbourne",
+       showInLegend: true,
+       dataPoints: [
+       { label: "6", y: 1092 },
+       { label: "8", y: 1387 },    
+       { label: "10", y: 1231 }, 
+       { label: "12", y: 1480 },                               
+       { label: "14", y: 1379 },
+       { label: "16", y: 2331 },
+       { label: "18", y: 2491 },
+       { label: "20", y: 2565 },
+       { label: "22", y: 1618 },
+       { label: "24", y: 774 },
+       { label: "2", y: 331 },
+       { label: "4", y: 298 }
+       ]
+     }, 
+      {      
+       type: "line",
+       name: "Sydney",
+       showInLegend: true,
+       dataPoints: [
+       { label: "6", y: 1503 },
+       { label: "8", y: 1995 },    
+       { label: "10", y: 1691 }, 
+       { label: "12", y: 1855 },                               
+       { label: "14", y: 2093 },
+       { label: "16", y: 3067 },
+       { label: "18", y: 3007 },
+       { label: "20", y: 2972 },
+       { label: "22", y: 1961 },
+       { label: "24", y: 951 },
+       { label: "2", y: 553 },
+       { label: "4", y: 561 }
+       ]
+     }
+    ],
+ /** Set axisY properties here*/
+    axisY:{
+      prefix: "",
+      suffix: "%"
+    }    
+  });
+
+chart.render();
+}
+
+function change() {
+    if (xhr.readyState == 4) {
+        if(xhr.status == 200){
+            var dataset = xhr.responseText;
+            var jstext = '{"tweets" :'+dataset+'}';
+            object = JSON.parse(jstext);
+            initialize(object);
+        }
+    }
+}
+</script>
+  </head>
+<!-- NAVBAR
+================================================== -->
+  <body onload="initialize()">
+    <div class="navbar-wrapper">
+      <div class="container">
+
+        <nav class="navbar navbar-inverse navbar-static-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#">Group 30</a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="index.html">Home</a></li>
+                <li><a href="caseone.html">Case One</a></li>
+                <li><a href="casetwo.html">Case Two</a></li>
+                <li><a href="casethree.html">Case Three</a></li>
+                <li><a href="coast.html">Location & Time</a></li>
+                <li><a href="aboutus.html">About Us</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+
+      
+    
+
+
+    <!-- Carousel
+    ================================================== -->
+    
+  <div class="row">
+    <div class="col-md-12">
+    <div id="map_canvas" style="height:500px">
+      
+    </div>
+    </div>
+    
+    </div>
+
+
+    <a class="button button-raised button-primary button-pill" onclick="submit1()">Melbourne</a>
+    <a class="button button-raised button-primary button-pill" onclick="submit2()">New castle</a>
+    <a class="button button-raised button-primary button-pill" onclick="submit3()">Brisbane</a>
+    <a class="button button-raised button-primary button-pill" onclick="chart()">Time Analysis</a>
+<div class="row">
+  <div class="col-md-6">
+  <div id="chartContainer" style="height: 300px;"></div>
+
+  </div>
+  <div class="col-md-6">
+  <div id="chartContainer2" style="height: 300px; "></div>
+  </div>
+  </div>
+      <!-- FOOTER -->
+      <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+       
+      </footer>
+</div>
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="dist/js/bootstrap.min.js"></script>
+    <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
+    <script src="assets/js/vendor/holder.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
