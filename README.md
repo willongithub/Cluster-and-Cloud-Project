@@ -1,7 +1,7 @@
 # Cluster-and-Cloud-Project
 It is repository for a project regarding cluster database system with its front end web page.
 
-[Demo video](https://youtu.be/YNeKlkuKz_w)
+[Demo video](https://youtu)
 
 
 ## Cloud Preparation
