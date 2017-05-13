@@ -19,7 +19,7 @@ import argparse
 ap = argparse.ArgumentParser()
 ap.add_argument("-i", "--ip-address", type=str, default='127.0.0.1',
 	help="ip address of server")
-ap.add_argument("-d", "--db-name", type=str, default='new-test',
+ap.add_argument("-d", "--db-name", type=str, default='new-database',
 	help="target database name")
 args = vars(ap.parse_args())
 
@@ -34,19 +34,21 @@ upload = "http://" + ip + ":5984/" + dbname
 # create new database for importing data
 
 a = requests.put(server)
-print a
+print 'New database named (' + dbname + ') created!'
 if a.json()['ok']:
     with open(filename, 'r') as f:
         content = json.load(f)
 
-        print 'upload start!'
+        print 'Upload start!'
+	count = 0
 
         for item in content['features']:
             payload = json.dumps(item)
-            print payload
+            #print payload
             r = requests.post(upload, data=payload, headers=headers)
-            print r.text
-        print 'upload done!'
+            #print r.text
+	    count += 1
+        print str(count) + ' entries uploaded!'
 else:
-    print 'database already exist!'
+    print 'Database already exist!'
 
