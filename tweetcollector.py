@@ -25,22 +25,22 @@ view = "http://localhost:5984/aus/_design/tweetfilter/_view/all"
 # two streams per credential limit
 
 # 1 left
-consumer_key = 'VIzYfBOGxiJH9iQ6rBuyV8wFs'
-consumer_secret = 'ttluNgk8ULjLxYEaopgM5hanUyeUhZgQOn1ybBZREFxK2jw8zj'
-access_token = '856740454066290688-ejOKwpEhlMVkuolwgoYmXP6URHHQXV5'
-access_token_secret = '1JGVhOZgRFYkGosYv5pDmqJnjvRWK8e6GGCox5iKZQkjK'
+consumer_key = 
+consumer_secret = 
+access_token = 
+access_token_secret = 
 '''
 # 2 used in clusters
-consumer_key = 'X2NWWf04gfUjdtbfTH3Cid15U'
-consumer_secret = '6yPaf6UwInpeDRLAJo4rPxVMDWxGBCCIwKOcdOnHWNnhvjkRdY'
-access_token = '859727563022770176-FmoK9SZzWE3poR2heK9OoHZNbtJYqdo'
-access_token_secret = 'Edfpr85YJZD4Dl3zB6WWDvJH4Py9KzQjW59oZnMFZGPH7'
+consumer_key = 
+consumer_secret = 
+access_token = 
+access_token_secret = 
 
 # 2 used in small vms chaoyang
-consumer_key = "DcAivbR4BuM3MLSQtKh3GGtF9"
-consumer_secret = "brSIPnoY0YtqblmMqDr4dt6FHiCRIDwrL1XzCkGceNlyj5BaXT"
-access_token = "4778110405-749P4Wz7rDwChVdQ4SL7f9bnY1jrtrINsxj5aZF"
-access_token_secret = "dA39ttpbCkqyxfWjO140g37RQruBQMn4SQzInBm1b9o1S"
+consumer_key = 
+consumer_secret = 
+access_token = 
+access_token_secret = 
 '''
 
 # This listener will print out all Tweets it receives
