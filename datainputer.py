@@ -1,4 +1,4 @@
-# upload json to couchDB
+# upload json to couchDB 2.0
 
 # Group 30
 # Surnames Names Student IDs
@@ -10,25 +10,43 @@
 
 import json
 import requests
-#import uuid
+import argparse
 
-filename = 'xxx.json'
-server = "http://admin:password@localhost:5984/_membership"
+# -i 'couchdb ip address' -d 'name of json file as well as database(newly created) name it will be in'
+# only support json file from AURIN
+
+# construct the argument parse and parse the arguments
+ap = argparse.ArgumentParser()
+ap.add_argument("-i", "--ip-address", type=str, default='127.0.0.1',
+	help="ip address of server")
+ap.add_argument("-d", "--db-name", type=str, default='new-test',
+	help="target database name")
+args = vars(ap.parse_args())
+
+dbname = args['db_name']
+ip = args['ip_address']
+filename = args['db_name'] + '.json'
+
+server = "http://" + ip + ":5984/" + dbname + "?n=3&q=4"
 headers = {'content-type': 'application/json'}
-upload = "http://127.0.0.1:5984/aurin"
-#upload = "http://127.0.0.1:5984/test/" + str(uuid.uuid4())
+upload = "http://" + ip + ":5984/" + dbname
 
-with open(filename, 'r') as f:
-    while True:
-        line = f.readline()
-        if line.startswith('{'):
-            line = line.rstrip('\n').rstrip(',')
-            #content = json.loads(line)
-            payload = line
+# create new database for importing data
+
+a = requests.put(server)
+print a
+if a.json()['ok']:
+    with open(filename, 'r') as f:
+        content = json.load(f)
+
+        print 'upload start!'
+
+        for item in content['features']:
+            payload = json.dumps(item)
+            print payload
             r = requests.post(upload, data=payload, headers=headers)
             print r.text
-        if line.startswith(']'):
-            q = requests.get(server)
-            print q.text
-            break
+        print 'upload done!'
+else:
+    print 'database already exist!'
 
