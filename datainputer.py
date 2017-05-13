@@ -32,23 +32,21 @@ headers = {'content-type': 'application/json'}
 upload = "http://" + ip + ":5984/" + dbname
 
 # create new database for importing data
-
-a = requests.put(server)
-print 'New database named (' + dbname + ') created!'
-if a.json()['ok']:
-    with open(filename, 'r') as f:
-        content = json.load(f)
-
-        print 'Upload start!'
-	count = 0
-
-        for item in content['features']:
-            payload = json.dumps(item)
-            #print payload
-            r = requests.post(upload, data=payload, headers=headers)
-            #print r.text
-	    count += 1
-        print str(count) + ' entries uploaded!'
-else:
+try:
+    a = requests.put(server)
+    if a.json()['ok']:
+        print 'New database named (' + dbname + ') created!'
+        with open(filename, 'r') as f:
+	    content = json.load(f)
+	    print 'Upload start!'
+	    count = 0
+	    for item in content['features']:
+	        payload = json.dumps(item)
+	        #print payload
+	        r = requests.post(upload, data=payload, headers=headers)
+	        #print r.text
+	        count += 1
+	    print str(count) + ' entries uploaded!'
+except KeyError:
     print 'Database already exist!'
 
