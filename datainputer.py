@@ -27,7 +27,7 @@ dbname = args['db_name']
 ip = args['ip_address']
 filename = args['db_name'] + '.json'
 
-server = "http://" + ip + ":5984/" + dbname + "?n=3&q=4"
+server = "http://admin:password" + ip + ":5984/" + dbname + "?n=3&q=4"
 headers = {'content-type': 'application/json'}
 upload = "http://" + ip + ":5984/" + dbname
 
