@@ -31,7 +31,9 @@ Note the ***IP Addresses*** of your VMs, it will be used to setup CouchDB.
 This part we use ***Ansible***. Details at [Link](https://github.com/willongithub/Cluster-and-Cloud-Project/blob/master/myansible).
 
 When done, run on VMs:
-'''sh startup.sh'''
+```
+sh startup.sh
+```
 
 it will start myserver.py and tweetcollector.py as background process on the machine.
 
@@ -55,5 +57,7 @@ You should put the json downloaded from AURIN in current folder.
 suppose your file is: victoria_sport_and_recreation_facility_locations_2015-2016.json
 
 then
-'''python datainputer.py -i '115.146.93.174' -d 'victoria_sport_and_recreation_facility_locations_2015-2016' '''
+```
+python datainputer.py -i '115.146.93.174' -d 'victoria_sport_and_recreation_facility_locations_2015-2016'
+```
 will upload the data in it to couchDB on 115.146.93.174.
