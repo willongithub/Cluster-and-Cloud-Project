@@ -1,5 +1,4 @@
 # notebook for the project
-# here are some useful shell command and info
 
 # Group 30
 # Surnames Names Student IDs
@@ -9,17 +8,15 @@
 # Yang Chao 795047
 # Li Hanchen 807363
 
-# VMs
+# VMs -testkey
+130.56.250.233
 130.56.249.18
 130.56.249.213
 
-# clusters
+# clusters -mykey
 115.146.93.174
 115.146.93.175
 115.146.93.176
-
-# retrieve file from git repository
-wget https://raw.githubusercontent.com/willongithub/Cluster-and-Cloud-Project/master/note.txt
 
 # mailbox
 750892 siqi wu swu5@student.unimelb.edu.au
@@ -27,6 +24,9 @@ wget https://raw.githubusercontent.com/willongithub/Cluster-and-Cloud-Project/ma
 795047 chao yang chaoy3@student.unimelb.edu.au
 756200 Danni Zhao zhaod1@student.unimelb.edu.au
 720722 Chongchong Wu
+
+# retrieve file from git repository
+wget https://raw.githubusercontent.com/willongithub/Cluster-and-Cloud-Project/master/note.txt
 
 # get into superuser shell
 sudo -i
@@ -39,11 +39,20 @@ sudo passwd couchdb
 su - couchdb
 exit
 
+# modify vm.args
+/usr/local/couchdb/etc/vm.args under user couchdb
+change localhost to ip address
+
 # restart couchDB
 sv restart couchdb
 
+# setup user
+curl -X PUT http://127.0.0.1:5984/_node/couchdb@<this-nodes-ip-address>/_config/chttpd/bind_address -d '"0.0.0.0"'
+curl -X PUT http://127.0.0.1:5984/_node/couchdb@<this-nodes-ip-address>/_config/admins/admin -d '"password"'
+then check local.ini, default.ini
+
 # creat tunnel for using Fauxton in browser
-ssh -N -L 9000:localhost:5984 -i testkey.pem ubuntu@115.146.93.176
+ssh -N -L 9000:localhost:5986 -i testkey.pem ubuntu@130.56.250.233
 
 # get database information
 curl -X GET http://127.0.0.1:5984/database_name | python -m json.tool
@@ -75,6 +84,7 @@ sudo lsof -i -P | grep -i "listen"
 
 # disk usage
 df -h
+du -h
 
 # brisbane tweet example id
 de5ff2d62e319831f9c7a860dc138b40
@@ -109,11 +119,15 @@ curl -X PUT "http://115.146.93.174:5984/aus/_design/tweetfilter/" -d "{function 
 curl -X GET "http://115.146.93.175:8848/?step=10&city=mel"
 
 # access view(mapped database)
-curl -X GET "http://115.146.93.176:5984/aus/_design/tweetfilter/_view/validdata/?limit=10" | python -m json.tool
+curl -X GET "http://115.146.93.174:5984/aus/_design/tweetfilter/_view/aus/?limit=10" | python -m json.tool
 
 # start server
 #! /bin/sh
 nohup python analysis_server.py &
+
+# attach volume
+sudo mkfs.ext4 /dev/vdb
+sudo mount /dev/vdb /mnt -t auto
 
 # install VADER
 pip install --upgrade pip
@@ -121,6 +135,23 @@ sudo -i
 pip install vaderSentiment
 pip install --upgrade vaderSentiment
 
+# add node afterwards
+curl -X PUT "http://admin:password@localhost:5986/_nodes/couchdb@130.56.250.233" -d {}
+
 # auto start
 #! /bin/sh
 nohup python analysis_server.py > analy.out 2>&1 &
+
+# move database/view location on disk
+- get root
+root
+- copy data file to new location
+cp -r ./data to new location
+- change owner of the target file
+chown -R couchdb:couchdb /path/to/data
+- change path in local.ini (it will override the content in default.ini as final config)
+[couchdb]
+database_dir = /path/to/the/databases
+view_index_dir = /path/to/the/views
+- restart couchDB
+sv restart couchdb
