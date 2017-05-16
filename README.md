@@ -47,3 +47,13 @@ myserver.py is a backend process used to handle request from web page. Now we've
 When request come, it will query CouchDB targeting certain database, CouchDB will do MapReduce then return desired data sets to myserver.py. Using those data, it can do sentiment analysis and get the results prepared for front end visualazation.
 
 The Web client is a page based on Google Map with some charts.
+
+## Upload data from AURIN using datainputer.py
+
+You should put the json downloaded from AURIN in current folder.
+
+suppose your file is: victoria_sport_and_recreation_facility_locations_2015-2016.json
+
+then
+'''python datainputer.py -i '115.146.93.174' -d 'victoria_sport_and_recreation_facility_locations_2015-2016' '''
+will upload the data in it to couchDB on 115.146.93.174.
