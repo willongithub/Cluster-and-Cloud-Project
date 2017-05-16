@@ -95,11 +95,11 @@ class MyHandler(BaseHTTPRequestHandler):
             self.wfile.write(result)
         elif querydict['ratio'] == 'yes':
             #result = avgscore(querydict['city'], querydict['mood'])
-            slot, result = analysis(querydict)
+            result = analysis(querydict)
             self.wfile.write(result)
         else:
             #index = 1
-            result, slot = analysis(querydict)
+            result = analysis(querydict)
             self.wfile.write(result)
 
         #else:
