@@ -43,8 +43,8 @@ class MyHandler(BaseHTTPRequestHandler):
         
         # send response
         self.send_response(200)
-        self.send_header("Access-Control-Allow-Origin", "*")
-        self.end_headers()
+        #self.send_header("Access-Control-Allow-Origin", "*")
+        #self.end_headers()
         
         
         pathlist, querydict = self.myparse_getrequest()
@@ -72,6 +72,9 @@ class MyHandler(BaseHTTPRequestHandler):
         #querydict['content'] = ''
 
         if querydict['html'] == 'yes':
+            #send headers
+            self.send_header("Content-type", "text/html")
+            self.end_headers()
             f = open("index.html", "r")
             result = f.read()
             self.wfile.write(result)
@@ -83,15 +86,15 @@ class MyHandler(BaseHTTPRequestHandler):
             self.wfile.write(result)
         elif querydict['mood'] != 'no':
             #result = avgscore(querydict['city'], querydict['mood'])
-            slot, result = analysis(querydict)
+            result = analysis(querydict)
             self.wfile.write(result)
         elif querydict['ratio'] == 'yes':
             #result = avgscore(querydict['city'], querydict['mood'])
-            slot, result = analysis(querydict)
+            result = analysis(querydict)
             self.wfile.write(result)
         else:
             #index = 1
-            result, slot = analysis(querydict)
+            result = analysis(querydict)
             self.wfile.write(result)
 
         #else:
@@ -164,13 +167,14 @@ def analysis(par):
 
     if par['mood'] != 'no':
         if int(par['mood']) > 0:
-            d = scorepos/totalpos
+	    d = scorepos/totalpos
         if int(par['mood']) < 0:
             d = scoreneg/totalneg
         if int(par['mood']) == 0:
             d = (scorepos + scoreneg)/(totalpos + totalneu + totalneg)
     if par['ratio'] == 'yes':
-        d = float(totalpos)/(totalpos + totalneu + totalneg)
+	    #d = 36/100
+	    d = float(totalpos)/(totalpos + totalneu + totalneg)
     return d
     
 

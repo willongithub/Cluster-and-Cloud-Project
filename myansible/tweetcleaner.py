@@ -1,5 +1,12 @@
 # find and remove duplicated data from couchDB
-# modified by Liam at Mon 8 May
+
+# Group 30
+# Surnames Names Student IDs
+# Wu Siqi 750892
+# Wu Chongchong 720722
+# Zhao Danni 756200
+# Yang Chao 795047
+# Li Hanchen 807363
 
 import json
 import requests

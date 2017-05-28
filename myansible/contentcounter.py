@@ -1,5 +1,12 @@
 # count tweets with certain content
-# Modified by Liam
+
+# Group 30
+# Surnames Names Student IDs
+# Wu Siqi 750892
+# Wu Chongchong 720722
+# Zhao Danni 756200
+# Yang Chao 795047
+# Li Hanchen 807363
 
 import json
 import requests
